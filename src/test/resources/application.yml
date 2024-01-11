@@ -1,18 +1,11 @@
 spring:
-  datasource:
-    url: jdbc:h2:mem:test
-    username: sa
-    password:
-    driver-class-name: org.h2.Driver
-
   jpa:
     hibernate:
-      ddl-auto: create
-    properties:
-      hibernate:
-#        show_sql: true
-        format_sql: true
-
-logging:
-  level:
-    org.hibernate.SQL: debug
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
+  datasource:
+    url: "jdbc:mysql://localhost:3306/jpashop?serverTimezone=Asia/Seoul"
+    username: root
+    password: 1234567890
+    driver-class-name: com.mysql.cj.jdbc.Driver

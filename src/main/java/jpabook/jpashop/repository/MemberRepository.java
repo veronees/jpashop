@@ -17,6 +17,7 @@ public class MemberRepository {
     //persist하면 영속성컨텍스트에 member객체를 넣고, 트랜잭션이 커밋되는 시저에 디비에 반영(디비에 인서트 쿼리가 날라가는거다.)
     public void save(Member member) {
         em.persist(member);
+        System.out.println("member.getName() = " + member.getName());
     }
 
     //단건 조회

@@ -41,4 +41,10 @@ public class MemberService {
     public Member findOne(Long memberId) {
         return memberRepository.fineOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.fineOne(id);
+        member.setName(name); //커밋 시점. 여기서 jpa가 변경 감지를 실행해서 update쿼리 날라감.
+    }
 }
