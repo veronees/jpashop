@@ -93,12 +93,32 @@ public class OrderRepository {
 
     public List<Order> findAllWithMemberDelivery() {
         List<Order> orderList = em.createQuery(
-                "select o from Order o join fetch o.member m join fetch o.delivery d",
-                Order.class
+                "select o from Order o join fetch o.member m join fetch o.delivery d", //member와 delivery는 XToOne관계라서 fetch join으로 한방에 가져와도 문제없음.
+                Order.class                                                                    //이유는 데이터 뻥튀기가 일어나지 않아서 페이징에 영향을 주지 않는다.
         ).getResultList();
 
         return orderList;
 
     }
 
+    public List<Order> findAllWithMemberDelivery(int offset, int limit) {
+        List<Order> orderList = em.createQuery(
+                "select o from Order o join fetch o.member m join fetch o.delivery d", //member와 delivery는 XToOne관계라서 fetch join으로 한방에 가져와도 문제없음.
+                Order.class                                                                    //이유는 데이터 뻥튀기가 일어나지 않아서 페이징에 영향을 주지 않는다.
+        ).setFirstResult(offset)
+                .setMaxResults(limit)
+                .getResultList();
+
+        return orderList;
+
+    }
+
+    public List<Order> findAllWithItem() {
+        List<Order> orderList = em.createQuery(
+                "select o from Order o join fetch o.member m join fetch o.delivery d join fetch o.orderItems oi join fetch oi.item i",
+                Order.class
+        ).getResultList();
+
+        return orderList;
+    }
 }

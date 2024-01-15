@@ -68,6 +68,7 @@ public class InitDb {
             em.persist(book1);
 
             Book book2 = new Book();
+            book2.setName("SPRING2 BOOK");
             book2.setPrice(40000);
             book2.setStockQuantity(300);
             em.persist(book2);
